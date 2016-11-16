@@ -5,6 +5,7 @@ import (
 	"testing"
 )
 
+// TestHashingAndChecking test function to verify hashing and verification of the library
 func TestHashingAndChecking(t *testing.T) {
 	const password = "test"
 	hashedPassword := HashPassword(password)
