@@ -5,13 +5,10 @@ import (
 	"testing"
 )
 
-func TestHashPassword(t *testing.T) {
+
+func TestHashingAndChecking(t *testing.T) {
 	const password = "test"
-	hashedPwd := HashPassword(password)
-	print(hashedPwd)
-	assert.Equal(t, hashedPwd, "", "Hashed password of %s should be equal to %s", password , "taka")
-}
-
-func TestCheckPassword(t *testing.T) {
-
+	hashedPassword := HashPassword(password)
+	result := CheckPassword(password, hashedPassword)
+	assert.Equal(t, result, true, "Hashing the password and then verifiying it should be equal")
 }

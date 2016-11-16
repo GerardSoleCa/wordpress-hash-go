@@ -21,8 +21,10 @@ func encode64(input string, count int) string {
 	i := 0
 
 	for ok := true; ok; ok = (i < count) {
-		i++
 		value := uint(input[i])
+
+		i++
+
 		output += string(ITOA64[value & 0x3f])
 
 		if i < count {
@@ -31,11 +33,12 @@ func encode64(input string, count int) string {
 
 		output += string(ITOA64[(value >> 6) & 0x3f])
 
-		i++
 
 		if i >= count {
 			break
 		}
+
+		i++
 
 		if i < count {
 			value |= uint(input[i]) << 16
@@ -43,11 +46,12 @@ func encode64(input string, count int) string {
 
 		output += string(ITOA64[(value >> 12) & 0x3f])
 
-		i++
 
 		if i >= count {
 			break
 		}
+
+		i++
 
 		output += string(ITOA64[(value >> 18) & 0x3f])
 	}
@@ -80,7 +84,8 @@ func cryptPrivate(password string, setting string) string {
 
 	count := 1 << countLog2
 
-	salt := setting[4:8]
+	salt := setting[4:12]
+
 	if len(salt) != 8 {
 		return output
 	}
@@ -93,6 +98,7 @@ func cryptPrivate(password string, setting string) string {
 
 	output = setting[0:12]
 	output += encode64(hash, 16)
+
 	return output
 }
 
@@ -112,6 +118,7 @@ func sixCharRandom() string {
 
 	for i < 6 {
 		text += string(POSSIBLE_CHARS[int(math.Floor(rand.Float64() * float64(len(POSSIBLE_CHARS))))])
+		i++
 	}
 
 	return text

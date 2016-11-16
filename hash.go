@@ -1,10 +1,8 @@
 package wphash
 
-import "fmt"
-
 func HashPassword(password string) string {
-	salt := generatePrivateSalt(sixCharRandom())
-	fmt.Println(salt)
+	random := sixCharRandom()
+	salt := generatePrivateSalt(random)
 	return cryptPrivate(password, salt)
 }
 
