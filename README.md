@@ -10,7 +10,7 @@ Implementation of Wordpress hashing system for Golang
 	
 ## Usage
 ```go
-    import wphash
+    import "github.com/GerardSoleCa/wordpress-hash-go"
     
     func main(){
         password := "thisisapassword"
