@@ -9,6 +9,7 @@ Implementation of Wordpress hashing system for Golang
 	go get github.com/GerardSoleCa/wordpress-hash-go
 	
 ## Usage
+```go
     import wphash
     
     func main(){
@@ -16,7 +17,7 @@ Implementation of Wordpress hashing system for Golang
         hash := wphash.HashPassword(password)
         checked := wphash.CheckPassword(password, hash)
     }
-
+```
 ## Tests
 	
 	go test
