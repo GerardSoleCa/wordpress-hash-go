@@ -1,16 +1,16 @@
 package wphash
 
 import (
-	"math"
-	"strings"
 	"crypto/md5"
-	"time"
+	"math"
 	"math/rand"
+	"strings"
+	"time"
 )
 
 const ITOA64 = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 const ITERATION_COUNT_LOG2 = 8
-const POSSIBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const POSSIBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 
 func init() {
 	rand.Seed(time.Now().UTC().UnixNano())
@@ -25,14 +25,13 @@ func encode64(input string, count int) string {
 
 		i++
 
-		output += string(ITOA64[value & 0x3f])
+		output += string(ITOA64[value&0x3f])
 
 		if i < count {
 			value |= uint(input[i]) << 8
 		}
 
-		output += string(ITOA64[(value >> 6) & 0x3f])
-
+		output += string(ITOA64[(value>>6)&0x3f])
 
 		if i >= count {
 			break
@@ -44,8 +43,7 @@ func encode64(input string, count int) string {
 			value |= uint(input[i]) << 16
 		}
 
-		output += string(ITOA64[(value >> 12) & 0x3f])
-
+		output += string(ITOA64[(value>>12)&0x3f])
 
 		if i >= count {
 			break
@@ -53,7 +51,7 @@ func encode64(input string, count int) string {
 
 		i++
 
-		output += string(ITOA64[(value >> 18) & 0x3f])
+		output += string(ITOA64[(value>>18)&0x3f])
 	}
 
 	return output
@@ -61,7 +59,7 @@ func encode64(input string, count int) string {
 
 func generatePrivateSalt(input string) string {
 	output := "$P$"
-	output += string(ITOA64[int(math.Min(ITERATION_COUNT_LOG2 + 5, 30))])
+	output += string(ITOA64[int(math.Min(ITERATION_COUNT_LOG2+5, 30))])
 	output += encode64(input, 6)
 	return output
 }
@@ -117,7 +115,7 @@ func sixCharRandom() string {
 	i := 0
 
 	for i < 6 {
-		text += string(POSSIBLE_CHARS[int(math.Floor(rand.Float64() * float64(len(POSSIBLE_CHARS))))])
+		text += string(POSSIBLE_CHARS[int(math.Floor(rand.Float64()*float64(len(POSSIBLE_CHARS))))])
 		i++
 	}
 

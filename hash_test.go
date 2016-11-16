@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 func TestHashingAndChecking(t *testing.T) {
 	const password = "test"
 	hashedPassword := HashPassword(password)
